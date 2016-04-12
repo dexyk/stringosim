@@ -2,7 +2,7 @@
 
 The plan for this package is to have Go implementation of different string distance/similarity functions, like Levenshtein (normalized, weighted, Damerau), Jaro-Winkler, Jaccard index, Euclidean distance, Hamming distance...
 
-Currently it has implemented Levenshtein, Jaccard and Hamming distance functions. Work in progress...
+Currently it has implemented Levenshtein, Jaccard, Hamming and LCS distance functions. Work in progress...
 
 ##Import and installation
 
@@ -19,7 +19,7 @@ import "github.com/dexyk/stringosim"
 
 ##Usage
 
-Currently only Levenshtein, Jaccard and Hamming string distances are implemented.
+Currently only Levenshtein, Jaccard, Hamming and LCS string distances are implemented.
 
 ####Levenshtein
 
@@ -76,6 +76,20 @@ fmt.Println(dis)
 
 _, err := stringosim.Hamming([]rune("testing"), []rune("testin"))
 fmt.Println(err)
+```
+
+####Longest Common Subsequence (LCS)
+
+LCS between two strings can be calculated with options. Default function will calculate the LCS with case insensitive option. It can be also used without case sensitive option.
+
+Example:
+```go
+fmt.Println(stringosim.LCS([]rune("testing lcs algorithm"), []rune("another l c s example")))
+    
+fmt.Println(stringosim.LCS([]rune("testing lcs algorithm"), []rune("ANOTHER L C S EXAMPLE"), 
+    stringosim.LCSSimilarityOptions{
+        CaseInsensitive: true,
+    }))
 ```
 
 
