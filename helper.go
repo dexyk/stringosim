@@ -5,19 +5,6 @@ import (
     "regexp"
 )
 
-type SimilarityOptions struct {
-    InsertCost      int
-    DeleteCost      int
-    SubstituteCost  int
-    CaseInsensitive bool
-}
-
-var DefaultSimilarityOptions SimilarityOptions = SimilarityOptions{
-    InsertCost:     1,
-    DeleteCost:     1,
-    SubstituteCost: 1,
-}
-
 func Min(a int, b int) int {
     if a < b {
         return a
@@ -60,4 +47,20 @@ func GetNGram(s string, n ...int) map[string]int {
         }
     }
     return m
+}
+
+func CompareErrors(e1 error, e2 error) bool {
+    if e1 == nil {
+        if e2 == nil {
+            return true
+        } else {
+            return false
+        }
+    } else {
+        if e2 == nil {
+            return false
+        } else {
+            return e1.Error() == e2.Error()
+        }
+    }
 }

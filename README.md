@@ -2,7 +2,7 @@
 
 The plan for this package is to have Go implementation of different string distance/similarity functions, like Levenshtein (normalized, weighted, Damerau), Jaro-Winkler, Jaccard index, Euclidean distance, Hamming distance...
 
-Currently it is empty. Work in progress...
+Currently it has implemented Levenshtein, Jaccard and Hamming distance functions. Work in progress...
 
 ##Import and installation
 
@@ -19,7 +19,7 @@ import "github.com/dexyk/stringosim"
 
 ##Usage
 
-Currently only Levenshtein and Jaccard string distances are implemented.
+Currently only Levenshtein, Jaccard and Hamming string distances are implemented.
 
 ####Levenshtein
 
@@ -30,14 +30,14 @@ Example:
 fmt.Println(stringosim.Levenshtein([]rune("stringosim"), []rune("stingobim")))
 
 fmt.Println(stringosim.Levenshtein([]rune("stringosim"), []rune("stingobim"),
-    stringosim.SimilarityOptions{
+    stringosim.LevenshteinSimilarityOptions{
         InsertCost:     3,
         DeleteCost:     5,
         SubstituteCost: 2,
 }))
 
 fmt.Println(stringosim.Levenshtein([]rune("stringosim"), []rune("STRINGOSIM"),
-    stringosim.SimilarityOptions{
+    stringosim.LevenshteinSimilarityOptions{
         InsertCost:      3,
         DeleteCost:      4,
         SubstituteCost:  5,
@@ -58,6 +58,25 @@ fmt.Println(stringosim.Jaccard([]rune("stringosim"), []rune("stingobim"), 2))
 fmt.Println(stringosim.Jaccard([]rune("stringosim"), []rune("stingobim"), 3))
 ```
 
+####Hamming
+
+Hamming distance can be calculated with options. Default function will calculate standard hamming distance with case sensitive option. It can be also used without case sensitive option.
+
+If the strings to compare have different lengths, the error will be returned.
+
+Example:
+```go
+dis, _ := stringosim.Hamming([]rune("testing"), []rune("restink"))
+fmt.Println(dis)
+
+dis, _ = stringosim.Hamming([]rune("testing"), []rune("FESTING"), stringosim.HammingSimilarityOptions{
+    CaseInsensitive: true,
+})
+fmt.Println(dis)
+
+_, err := stringosim.Hamming([]rune("testing"), []rune("testin"))
+fmt.Println(err)
+```
 
 
 

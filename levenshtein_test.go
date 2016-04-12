@@ -4,25 +4,25 @@ import (
     "testing"
 )
 
-var testSimilarityOptions1 SimilarityOptions = SimilarityOptions{
+var testLevenshteinOptions1 LevenshteinSimilarityOptions = LevenshteinSimilarityOptions{
     InsertCost:     2,
     DeleteCost:     3,
     SubstituteCost: 5,
 }
-var testSimilarityOptions2 SimilarityOptions = SimilarityOptions{
+var testLevenshteinOptions2 LevenshteinSimilarityOptions = LevenshteinSimilarityOptions{
     InsertCost:     5,
     DeleteCost:     2,
     SubstituteCost: 3,
 }
-var testSimilarityOptions3 SimilarityOptions = SimilarityOptions{
+var testLevenshteinOptions3 LevenshteinSimilarityOptions = LevenshteinSimilarityOptions{
     InsertCost:     3,
     DeleteCost:     5,
     SubstituteCost: 2,
 }
-var testSimilarityOptions4 SimilarityOptions = SimilarityOptions{
-    InsertCost:      DefaultSimilarityOptions.InsertCost,
-    DeleteCost:      DefaultSimilarityOptions.DeleteCost,
-    SubstituteCost:  DefaultSimilarityOptions.SubstituteCost,
+var testLevenshteinOptions4 LevenshteinSimilarityOptions = LevenshteinSimilarityOptions{
+    InsertCost:      DefaultLevenshteinSimilarityOptions.InsertCost,
+    DeleteCost:      DefaultLevenshteinSimilarityOptions.DeleteCost,
+    SubstituteCost:  DefaultLevenshteinSimilarityOptions.SubstituteCost,
     CaseInsensitive: true,
 }
 
@@ -30,41 +30,41 @@ type LevenshteinTest struct {
     src string
     trg string
     dis int
-    opt SimilarityOptions
+    opt LevenshteinSimilarityOptions
 }
 
 var levenshteinTests = []LevenshteinTest{
-    {"", "", 0, DefaultSimilarityOptions},
-    {"", "", 0, testSimilarityOptions1},
-    {"", "", 0, testSimilarityOptions2},
-    {"", "", 0, testSimilarityOptions3},
-    {"x", "", 1, DefaultSimilarityOptions},
-    {"x", "", 3, testSimilarityOptions1},
-    {"x", "", 2, testSimilarityOptions2},
-    {"x", "", 5, testSimilarityOptions3},
-    {"x", "x", 0, DefaultSimilarityOptions},
-    {"x", "x", 0, testSimilarityOptions1},
-    {"x", "x", 0, testSimilarityOptions2},
-    {"x", "x", 0, testSimilarityOptions3},
-    {"xx", "xy", 1, DefaultSimilarityOptions},
-    {"xx", "xy", 5, testSimilarityOptions1},
-    {"xx", "xy", 3, testSimilarityOptions2},
-    {"xx", "xy", 2, testSimilarityOptions3},
-    {"xxx", "xyx", 1, DefaultSimilarityOptions},
-    {"xxx", "xyx", 5, testSimilarityOptions1},
-    {"xxx", "xyx", 3, testSimilarityOptions2},
-    {"xxx", "xyx", 2, testSimilarityOptions3},
-    {"xxyy", "xyz", 2, DefaultSimilarityOptions},
-    {"xxyy", "xyz", 8, testSimilarityOptions1},
-    {"xxyy", "xyz", 5, testSimilarityOptions2},
-    {"xxyy", "xyz", 7, testSimilarityOptions3},
-    {"xxyyzz", "xxxzzz", 2, DefaultSimilarityOptions},
-    {"xxyyzz", "xxxzzz", 10, testSimilarityOptions1},
-    {"xxyyzz", "xxxzzz", 6, testSimilarityOptions2},
-    {"xxyyzz", "xxxzzz", 4, testSimilarityOptions3},
-    {"asdlkajsdlkasdkj", "fkdsjlkdf", 11, DefaultSimilarityOptions},
-    {"STRING", "string", 0, testSimilarityOptions4},
-    {"STRING", "Astring", 1, testSimilarityOptions4},
+    {"", "", 0, DefaultLevenshteinSimilarityOptions},
+    {"", "", 0, testLevenshteinOptions1},
+    {"", "", 0, testLevenshteinOptions2},
+    {"", "", 0, testLevenshteinOptions3},
+    {"x", "", 1, DefaultLevenshteinSimilarityOptions},
+    {"x", "", 3, testLevenshteinOptions1},
+    {"x", "", 2, testLevenshteinOptions2},
+    {"x", "", 5, testLevenshteinOptions3},
+    {"x", "x", 0, DefaultLevenshteinSimilarityOptions},
+    {"x", "x", 0, testLevenshteinOptions1},
+    {"x", "x", 0, testLevenshteinOptions2},
+    {"x", "x", 0, testLevenshteinOptions3},
+    {"xx", "xy", 1, DefaultLevenshteinSimilarityOptions},
+    {"xx", "xy", 5, testLevenshteinOptions1},
+    {"xx", "xy", 3, testLevenshteinOptions2},
+    {"xx", "xy", 2, testLevenshteinOptions3},
+    {"xxx", "xyx", 1, DefaultLevenshteinSimilarityOptions},
+    {"xxx", "xyx", 5, testLevenshteinOptions1},
+    {"xxx", "xyx", 3, testLevenshteinOptions2},
+    {"xxx", "xyx", 2, testLevenshteinOptions3},
+    {"xxyy", "xyz", 2, DefaultLevenshteinSimilarityOptions},
+    {"xxyy", "xyz", 8, testLevenshteinOptions1},
+    {"xxyy", "xyz", 5, testLevenshteinOptions2},
+    {"xxyy", "xyz", 7, testLevenshteinOptions3},
+    {"xxyyzz", "xxxzzz", 2, DefaultLevenshteinSimilarityOptions},
+    {"xxyyzz", "xxxzzz", 10, testLevenshteinOptions1},
+    {"xxyyzz", "xxxzzz", 6, testLevenshteinOptions2},
+    {"xxyyzz", "xxxzzz", 4, testLevenshteinOptions3},
+    {"asdlkajsdlkasdkj", "fkdsjlkdf", 11, DefaultLevenshteinSimilarityOptions},
+    {"STRING", "string", 0, testLevenshteinOptions4},
+    {"STRING", "Astring", 1, testLevenshteinOptions4},
 }
 
 func TestLevenshtein(t *testing.T) {

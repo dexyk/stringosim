@@ -4,11 +4,24 @@ import (
     "unicode"
 )
 
-func Levenshtein(s []rune, t []rune, options ...SimilarityOptions) int {
-    changeCost := DefaultSimilarityOptions.SubstituteCost
-    deleteCost := DefaultSimilarityOptions.DeleteCost
-    insertCost := DefaultSimilarityOptions.InsertCost
-    caseInsensitive := DefaultSimilarityOptions.CaseInsensitive
+type LevenshteinSimilarityOptions struct {
+    InsertCost      int
+    DeleteCost      int
+    SubstituteCost  int
+    CaseInsensitive bool
+}
+
+var DefaultLevenshteinSimilarityOptions = LevenshteinSimilarityOptions{
+    InsertCost:     1,
+    DeleteCost:     1,
+    SubstituteCost: 1,
+}
+
+func Levenshtein(s []rune, t []rune, options ...LevenshteinSimilarityOptions) int {
+    changeCost := DefaultLevenshteinSimilarityOptions.SubstituteCost
+    deleteCost := DefaultLevenshteinSimilarityOptions.DeleteCost
+    insertCost := DefaultLevenshteinSimilarityOptions.InsertCost
+    caseInsensitive := DefaultLevenshteinSimilarityOptions.CaseInsensitive
     if len(options) > 0 {
         for _, option := range options {
             changeCost = option.SubstituteCost
