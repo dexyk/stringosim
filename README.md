@@ -17,6 +17,12 @@ To use the library just import it in your code:
 import "github.com/dexyk/stringosim"
 ```
 
+To run the tests, go to the directory where stringosim package is installed and run:
+
+```
+go test
+```
+
 ##Usage
 
 Currently only Levenshtein, Jaccard, Hamming and LCS string distances are implemented.
@@ -89,6 +95,29 @@ fmt.Println(stringosim.LCS([]rune("testing lcs algorithm"), []rune("another l c 
 fmt.Println(stringosim.LCS([]rune("testing lcs algorithm"), []rune("ANOTHER L C S EXAMPLE"), 
     stringosim.LCSSimilarityOptions{
         CaseInsensitive: true,
+    }))
+```
+
+
+####Jaro and Jaro-Winkler
+
+Jaro and Jaro-Winkler can be calculated with options: case insensitive, and specific values for Jaro-Winkler - threshold, p value and l value.
+
+Example:
+```go
+fmt.Println(stringosim.Jaro([]rune("abaccbabaacbcb"), []rune("bababbcabbaaca")))
+fmt.Println(stringosim.Jaro([]rune("abaccbabaacbcb"), []rune("ABABAbbCABbaACA"),
+    stringosim.JaroSimilarityOptions{
+        CaseInsensitive: true,
+    }))
+
+fmt.Println(stringosim.JaroWinkler([]rune("abaccbabaacbcb"), []rune("bababbcabbaaca")))
+fmt.Println(stringosim.JaroWinkler([]rune("abaccbabaacbcb"), []rune("BABAbbCABbaACA"),
+    stringosim.JaroSimilarityOptions{
+        CaseInsensitive: true,
+        Threshold:       0.7,
+        PValue:          0.1,
+        LValue:          4,
     }))
 ```
 

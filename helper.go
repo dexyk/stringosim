@@ -3,7 +3,12 @@ package stringosim
 import (
     "math"
     "regexp"
+    "unicode"
 )
+
+type SimilarityOptions struct {
+    CaseInsensitive bool
+}
 
 func Min(a int, b int) int {
     if a < b {
@@ -63,4 +68,8 @@ func CompareErrors(e1 error, e2 error) bool {
             return e1.Error() == e2.Error()
         }
     }
+}
+
+func SameRune(a rune, b rune, caseInsensitive bool) bool {
+    return a == b || (caseInsensitive && unicode.ToLower(a) == unicode.ToLower(b))
 }

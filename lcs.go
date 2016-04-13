@@ -1,8 +1,6 @@
 package stringosim
 
-import (
-    "unicode"
-)
+import ()
 
 type LCSSimilarityOptions struct {
     CaseInsensitive bool
@@ -28,12 +26,13 @@ func LCS(s []rune, t []rune, options ...LCSSimilarityOptions) int {
     for i := 1; i <= len(s); i++ {
         d[i][0] = 0
         for j := 1; j <= len(t); j++ {
-            if s[i-1] == t[j-1] || (opt.CaseInsensitive && unicode.ToLower(s[i-1]) == unicode.ToLower(t[j-1])) {
+            if SameRune(s[i-1], t[j-1], opt.CaseInsensitive) {
                 d[i][j] = d[i-1][j-1] + 1
             } else {
                 d[i][j] = Max(d[i-1][j], d[i][j-1])
             }
         }
     }
+
     return d[len(s)][len(t)]
 }

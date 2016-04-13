@@ -2,7 +2,6 @@ package stringosim
 
 import (
     "errors"
-    "unicode"
 )
 
 var HAMMING_ERROR_DIFFERENT_LENGTH = errors.New("Can't compare strings of different lengths")
@@ -26,7 +25,7 @@ func Hamming(s []rune, t []rune, options ...HammingSimilarityOptions) (int, erro
     }
     ret := 0
     for i, cs := range s {
-        if cs != t[i] && (!opt.CaseInsensitive || unicode.ToLower(cs) != unicode.ToLower(t[i])) {
+        if !SameRune(cs, t[i], opt.CaseInsensitive) {
             ret++
         }
     }

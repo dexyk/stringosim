@@ -1,8 +1,6 @@
 package stringosim
 
-import (
-    "unicode"
-)
+import ()
 
 type LevenshteinSimilarityOptions struct {
     InsertCost      int
@@ -41,7 +39,7 @@ func Levenshtein(s []rune, t []rune, options ...LevenshteinSimilarityOptions) in
         d[0] = (is + 1) * deleteCost
         for it, ct := range t {
             curChangeCost := changeCost
-            if cs == ct || (caseInsensitive && unicode.ToLower(cs) == unicode.ToLower(ct)) {
+            if SameRune(cs, ct, caseInsensitive) {
                 curChangeCost = 0
             }
             nextD := Min(Min(d[it+1]+deleteCost, d[it]+insertCost), tmpD+curChangeCost)
