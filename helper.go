@@ -73,3 +73,30 @@ func CompareErrors(e1 error, e2 error) bool {
 func SameRune(a rune, b rune, caseInsensitive bool) bool {
     return a == b || (caseInsensitive && unicode.ToLower(a) == unicode.ToLower(b))
 }
+
+func AbsInt(v int) int {
+    if v > 0 {
+        return v
+    } else {
+        return -v
+    }
+}
+
+func DotProductNGrams(m1, m2 map[string]int) int {
+    ret := 0
+    for k1, v1 := range m1 {
+        v2, ok := m2[k1]
+        if ok {
+            ret += v1 * v2
+        }
+    }
+    return ret
+}
+
+func NormNGram(m map[string]int) float64 {
+    ret := 0.0
+    for _, v := range m {
+        ret += float64(v) * float64(v)
+    }
+    return math.Sqrt(ret)
+}
