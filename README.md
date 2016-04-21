@@ -2,7 +2,7 @@
 
 The plan for this package is to have Go implementation of different string distance/similarity functions, like Levenshtein (normalized, weighted, Damerau), Jaro-Winkler, Jaccard index, Euclidean distance, Hamming distance...
 
-Currently it has implemented Levenshtein, Jaccard, Hamming, LCS and Q-gram distance functions. Work in progress...
+Currently it has implemented Levenshtein, Jaccard, Hamming, LCS, Q-gram and Cosine distance functions. Work in progress...
 
 ##Import and installation
 
@@ -25,7 +25,7 @@ go test
 
 ##Usage
 
-Currently only Levenshtein, Jaccard, Hamming, LCS string and Q-gram distances are implemented.
+Currently only Levenshtein, Jaccard, Hamming, LCS string, Q-gram and Cosine distances are implemented.
 
 ####Levenshtein
 
@@ -131,6 +131,21 @@ fmt.Println(stringosim.QGram([]rune("abcde"), []rune("abdcde")))
 
 fmt.Println(stringosim.QGram([]rune("abcde"), []rune("ABDCDE"),
     stringosim.QGramSimilarityOptions{
+        CaseInsensitive: true,
+        NGramLength:     3,
+    }))
+```
+
+####Cosine
+
+Cosine distance can be calculated using default options (DefaultCosineOptions): length of n-grams is 2 and comparison is case sensitive. Using CosineSimilarityOptions as the parameter of the function we can set custom n-gram length and if the comparison is case sensitive or not.
+
+Example:
+```go
+fmt.Println(stringosim.Cosine([]rune("abcde"), []rune("abdcde")))
+
+fmt.Println(stringosim.Cosine(Cosine[]rune("abcde"), []rune("ABDCDE"),
+    stringosim.CosineSimilarityOptions{
         CaseInsensitive: true,
         NGramLength:     3,
     }))
