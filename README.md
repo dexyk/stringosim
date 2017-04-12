@@ -1,4 +1,4 @@
-#stringosim
+# stringosim
 
 The plan for this package is to have Go implementation of different string distance/similarity functions, like Levenshtein (normalized, weighted, Damerau), Jaro-Winkler, Jaccard index, Euclidean distance, Hamming distance...
 
@@ -23,11 +23,11 @@ To run the tests, go to the directory where stringosim package is installed and 
 go test
 ```
 
-##Usage
+## Usage
 
 Currently only Levenshtein, Jaccard, Hamming, LCS string, Q-gram and Cosine distances are implemented.
 
-####Levenshtein
+#### Levenshtein
 
 Levenshtein distance can be calculated with default parameters (use DefaultSimilarityOptions) where cost of insert, delete and substitute operation are 1. You can also use it with other parameters by using SimilarityOptions type. Setting CaseInsensitive to true in SimilarityOptions the comparison will be done without considering character cases. 
 
@@ -51,7 +51,7 @@ fmt.Println(stringosim.Levenshtein([]rune("stringosim"), []rune("STRINGOSIM"),
 }))
 ```
 
-####Jaccard
+#### Jaccard
 
 Jaccard distance can be calculated by setting the size of the n-gram which will be used for comparison. If the size is omitted the default value of 1 will be used.
 
@@ -64,7 +64,7 @@ fmt.Println(stringosim.Jaccard([]rune("stringosim"), []rune("stingobim"), 2))
 fmt.Println(stringosim.Jaccard([]rune("stringosim"), []rune("stingobim"), 3))
 ```
 
-####Hamming
+#### Hamming
 
 Hamming distance can be calculated with options. Default function will calculate standard hamming distance with case sensitive option. It can be also used without case sensitive option.
 
@@ -84,7 +84,7 @@ _, err := stringosim.Hamming([]rune("testing"), []rune("testin"))
 fmt.Println(err)
 ```
 
-####Longest Common Subsequence (LCS)
+#### Longest Common Subsequence (LCS)
 
 LCS between two strings can be calculated with options. Default function will calculate the LCS with case insensitive option. It can be also used without case sensitive option.
 
@@ -99,7 +99,7 @@ fmt.Println(stringosim.LCS([]rune("testing lcs algorithm"), []rune("ANOTHER L C 
 ```
 
 
-####Jaro and Jaro-Winkler
+#### Jaro and Jaro-Winkler
 
 Jaro and Jaro-Winkler can be calculated with options: case insensitive, and specific values for Jaro-Winkler - threshold, p value and l value.
 
@@ -121,7 +121,7 @@ fmt.Println(stringosim.JaroWinkler([]rune("abaccbabaacbcb"), []rune("BABAbbCABba
     }))
 ```
 
-####Q-gram
+#### Q-gram
 
 Q-gram distance can be calculated using default options (DefaultQGramOptions): length of q-grams is 2 and comparison is case sensitive. Using QGramSimilarityOptions as the parameter of the function we can set custom q-gram length and if the comparison is case sensitive or not.
 
@@ -136,7 +136,7 @@ fmt.Println(stringosim.QGram([]rune("abcde"), []rune("ABDCDE"),
     }))
 ```
 
-####Cosine
+#### Cosine
 
 Cosine distance can be calculated using default options (DefaultCosineOptions): length of n-grams is 2 and comparison is case sensitive. Using CosineSimilarityOptions as the parameter of the function we can set custom n-gram length and if the comparison is case sensitive or not.
 
