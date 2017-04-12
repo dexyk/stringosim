@@ -4,7 +4,7 @@ The plan for this package is to have Go implementation of different string dista
 
 Currently it has implemented Levenshtein, Jaccard, Hamming, LCS, Q-gram and Cosine distance functions. Work in progress...
 
-##Import and installation
+## Import and installation
 
 To get the library just run:
 ```
