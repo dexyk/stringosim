@@ -2,7 +2,15 @@
 
 The plan for this package is to have Go implementation of different string distance/similarity functions, like Levenshtein (normalized, weighted, Damerau), Jaro-Winkler, Jaccard index, Euclidean distance, Hamming distance...
 
-Currently it has implemented Levenshtein, Jaccard, Hamming, LCS, Q-gram and Cosine distance functions. Work in progress...
+Currently it has implemented:
+ - Levenshtein
+ - Jaccard
+ - Hamming
+ - LCS
+ - Q-gram
+ - n-gram based Cosine distanc
+
+ Work in progress...
 
 ## Import and installation
 
@@ -30,7 +38,7 @@ Currently only Levenshtein, Jaccard, Hamming, LCS string, Q-gram and Cosine dist
 
 #### Levenshtein
 
-Levenshtein distance can be calculated with default parameters (use DefaultSimilarityOptions) where cost of insert, delete and substitute operation are 1. You can also use it with other parameters by using SimilarityOptions type. Setting CaseInsensitive to true in SimilarityOptions the comparison will be done without considering character cases. 
+Levenshtein distance can be calculated with default parameters (use DefaultSimilarityOptions) where cost of insert, delete and substitute operation are 1. You can also use it with other parameters by using SimilarityOptions type. Setting CaseInsensitive to true in SimilarityOptions the comparison will be done without considering character cases.
 
 Example:
 
@@ -62,9 +70,9 @@ Example:
 ```go
     fmt.Println(stringosim.Jaccard([]rune("stringosim"), []rune("stingobim")))
 
-    fmt.Println(stringosim.Jaccard([]rune("stringosim"), []rune("stingobim"), 2))
+    fmt.Println(stringosim.Jaccard([]rune("stringosim"), []rune("stingobim"), []int{2}))
 
-    fmt.Println(stringosim.Jaccard([]rune("stringosim"), []rune("stingobim"), 3))
+    fmt.Println(stringosim.Jaccard([]rune("stringosim"), []rune("stingobim"), []int{3}))
 ```
 
 #### Hamming
@@ -97,7 +105,7 @@ Example:
 ```go
     fmt.Println(stringosim.LCS([]rune("testing lcs algorithm"), []rune("another l c s example")))
 
-    fmt.Println(stringosim.LCS([]rune("testing lcs algorithm"), []rune("ANOTHER L C S EXAMPLE"), 
+    fmt.Println(stringosim.LCS([]rune("testing lcs algorithm"), []rune("ANOTHER L C S EXAMPLE"),
     stringosim.LCSSimilarityOptions{
         CaseInsensitive: true,
     }))
@@ -139,7 +147,7 @@ Example:
     fmt.Println(stringosim.QGram([]rune("abcde"), []rune("ABDCDE"),
     stringosim.QGramSimilarityOptions{
         CaseInsensitive: true,
-        NGramLength:     3,
+        NGramSizes:     []int{3},
     }))
 ```
 
@@ -155,7 +163,6 @@ Example:
     fmt.Println(stringosim.Cosine(Cosine[]rune("abcde"), []rune("ABDCDE"),
     stringosim.CosineSimilarityOptions{
         CaseInsensitive: true,
-        NGramLength:     3,
+        NGramSizes:     []int{3},
     }))
 ```
-

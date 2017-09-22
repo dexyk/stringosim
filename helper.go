@@ -30,25 +30,19 @@ func EqualFloat64(x, y float64) bool {
 	return math.Abs(x-y) < EPS
 }
 
-func GetNGram(s string, n ...int) map[string]int {
-	nGram := 1
-	if len(n) > 0 {
-		for _, v := range n {
-			nGram = v
-			break
-		}
-	}
-
+func GetNGram(s string, NGramSizes []int) map[string]int {
 	regExp := regexp.MustCompile(`\s+`)
 	t := regExp.ReplaceAllString(s, " ")
 	m := make(map[string]int)
-	for i := 0; i <= len(t)-nGram; i++ {
-		v := string(t[i:(i + nGram)])
-		cnt, ok := m[v]
-		if ok {
-			m[v] = cnt + 1
-		} else {
-			m[v] = 1
+	for _, nGram := range NGramSizes {
+		for i := 0; i <= len(t)-nGram; i++ {
+			v := string(t[i:(i + nGram)])
+			cnt, ok := m[v]
+			if ok {
+				m[v] = cnt + 1
+			} else {
+				m[v] = 1
+			}
 		}
 	}
 	return m
